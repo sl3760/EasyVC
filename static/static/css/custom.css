@@ -1,0 +1,58 @@
+.alert-success{
+    font-size: 30px;
+}
+
+.photo img {
+    width: 80px;
+    height: 80px;
+}
+
+.col {
+    display: inline;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.porList li.list {
+    border-top: solid 1px #ddd;
+    padding-bottom: 30px;
+    padding-left: 28px;
+}
+
+
+.clearfix{
+    zoom: 1;
+}
+
+.fl {
+    float: left;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+.fs24 {
+    font-size: 24px;
+}
+
+.fs18 {
+    font-size: 18px;
+}
+
+.fwb {
+    font-weight: bold;
+}
+
+.yahei {
+    font-family: "Microsoft YaHei" !important;
+}
+
+.blue {
+    color: blue;
+}
+
+li {
+    list-style-type:none;
+}

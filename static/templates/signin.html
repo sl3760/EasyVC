@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/jumbotron.css" rel="stylesheet">
+      
+    <!-- Custom styles for this template -->
+    <link href="/static/css/custom.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="/static/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">EasyVC</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">           
+                <li class="active"><a href="">Home</a></li>
+                <li><a href="http://127.0.0.1:8000/VCUI">VC</a></li>
+                <li><a href="http://127.0.0.1:8000/startupUI">Startup</a></li>
+            </ul>
+            
+            <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.user }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="http://127.0.0.1:8000/">Logout</a></li>
+                </ul>
+                </li>
+            </ul>       
+        </div>
+      </div>
+    </div>
+    <div class='col-md-8 col-md-offset-2' id="main">
+        <div class="jumbotron" id="jumbotron">
+          <div class="row" id="row1">
+            <div class="col-md-4" id="col1">
+              <div class="yahei fs24 blue fwb">
+                Industry
+              </div>
+              <select name="industry" id="filterIndustry" class="form-control" style="width:150px">
+                  <option value="All">All</option>
+                  <option value="Internet">Internet</option>
+                  <option value="Game">Game</option>
+                  <option value="Data">Data</option>
+                  <option value="Hardware">Hardware</option>
+                  <option value="Software">Software</option>
+                  <option value="Media">Media</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Education">Education</option>
+                  <option value="Health">Health</option>
+                  <option value="Art">Art</option>
+                  <option value="Accommodation">Accommodation</option>
+                  <option value="Food">Food</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Food">Food</option>
+                  <option value="Real-Estate">Real-Estate</option>
+                  <option value="Energy">Energy</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <div class="yahei fs24 blue fwb">
+                  Amount
+              </div>
+              <select name="amount" id="filterAmount" class="form-control" style="width:150px">
+                <option value="0">All</option>
+                <option value="10000">Under $10,000</option>
+                <option value="50000">$10,000-$50,000</option>
+                <option value="100000">$50,000-$100,000</option>
+                <option value="500000">$100,000-$500,000</option>
+                <option value="1000000">$500,000-$1000,000</option>
+                <option value="5000000">$1000,000-$5000,000</option>
+                <option value="10000000">$5000,000 & Above</option>	    
+	      </select>
+            </div>
+            <div class="col-md-4">
+              <div class="yahei fs24 blue fwb">
+                  Location
+              </div>
+              <select name="location" id="filterLocation" class="form-control" style="width:150px">
+                <option value="All">All</option>
+                <option value="NY">New York Metro Area</option>
+                <option value="Northeast">Northeast</option>
+                <option value="Southeast">Southeast</option>
+                <option value="Middle">Middle</option>
+                <option value="South">South</option>
+                <option value="Northwest">Northwest</option>
+                <option value="West">West</option>
+                <option value="Southwest">Southwest</option>
+                <option value="West">International</option>
+	      </select>
+            </div>
+          </div>
+        </div>  
+    </div>
+        
+    <div class='col-md-8 col-md-offset-2'>
+        <div class="jumbotron">
+            <ul class="porList">
+                {% for user in users %}
+                <li class="clearfix list" style="background-color: rgb(255, 255, 255);">
+                    <div class="fl photo" style="padding-top: 25px;">
+                        <img src='{{user.image}}'>
+                    </div>
+                    <div class="col ml10" style="width: 260px;padding-top:20px;">
+                        <a class="yahei fs24 blue fwb">{{ user.firstName }} {{ user.lastName }}</a>
+                        <div>{{ user.position }}</div>
+                        <div>{{ user.location }}</div>
+                    </div>
+    
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+		
+    
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#filterIndustry").change(function(){
+        var industry = $("#filterIndustry").val();
+        $.ajax({
+          type:"POST",
+          url:"http://127.0.0.1:8000/VCUI/",
+          data:{
+            industry:industry,
+          },
+          success:function(data){
+            alert("success!");
+          },
+          error: function(xhr,textStatus,errorThrown){
+            alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+          }
+        });
+      });
+    });
+  </script>
+  
+</html>
+
+

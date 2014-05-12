@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block extra %}
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+{% endblock %}
+
+{% block sign %}
+    <form class="navbar-form navbar-right" role="form" method='POST' action='http://127.0.0.1:8000/signin/'>{% csrf_token %}
+        <div class="form-group">
+          <input type="text" name='email' placeholder="Email" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="password" name='password' placeholder="Password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Sign in</button>
+        <button type="button" class="btn btn-success" onclick="location.href='http://127.0.0.1:8000/VCSignup/'">VC Sign up</button>
+        <button type="button" class="btn btn-success" onclick="location.href='http://127.0.0.1:8000/StartupSignup/'">Startup Sign up</button>
+    </form>
+
+{% endblock %}
+
+{% block background %}
+    <div>
+        <img src='../media/background/background.jpg' width=1430 height=800>
+    </div>
+{% endblock %}

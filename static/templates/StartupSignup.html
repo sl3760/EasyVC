@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block extra %}
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+{% endblock %}
+
+{% block jumbotron %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcom EasyVC!</h1>
+      </div>      
+    </div>
+    
+{% endblock %}
+
+{% block content %}
+
+<div class='col-sm-12' style='text-align: center;'>
+    <h1>Join Now</h1>
+    
+</div>
+
+<div class='col-sm-6 col-sm-offset-2'>
+    <form role="form" enctype='multipart/form-data' name='StartupSignup' method='POST' action='http://127.0.0.1:8000/StartupSignup/'>{% csrf_token %}
+        <div class="form-group">
+            <label for="UserName">User Name</label>
+            <input type='text' name='userName' class="form-control" id="UserName" placeholder="Enter user name">
+        </div>
+        <div class="form-group">
+            <label for="InputEmail">Email address</label>
+            <input type='email' name='email' class="form-control" id="InputEmail" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input type='password' name='password' class="form-control" id="InputPassword" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="InputPassword">Re-enter Password</label>
+            <input type='password' name='repassword' class="form-control" id="InputPassword" placeholder="Re-enter Password">
+        </div>
+        <div class="form-group">
+            <label for="InputFirstName">First Name</label>
+            <input type='text' name='firstName' class="form-control" id="InputFisrtName" placeholder="Enter first name">
+        </div>
+        <div class="form-group">
+            <label for="InputLastName">Last Name</label>
+            <input type='text' name='lastName' class="form-control" id="InputLastName" placeholder="Enter last name">
+        </div>
+        <div class="form-group">
+            <label for="image">Upload Image</label>
+            <input type="file" name="image" id="image" class="btn btn-primary" size="20">
+        </div>
+        <div class="form-group">
+            <label for="Project">Project Name</label>
+            <input type='text' name='project' class="form-control" id="Project" placeholder="Enter project name">
+        </div>
+        <div class="form-group">
+            <label for="Location">Location</label>
+            <select class="form-control" name="location">
+                <option value="NY">New York Metro Area</option>
+                <option value="Northeast">Northeast</option>
+                <option value="Southeast">Southeast</option>
+                <option value="South">South</option>
+                <option value="Middle">Middle</option>
+                <option value="Northwest">Northwest</option>
+                <option value="West">West</option>
+                <option value="Southwest">Southwest</option>
+                <option value="International">International</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Industry">Industry</label>
+            <select multiple class="form-control" name="industry">
+                <option value="Internet">Internet</option>
+                <option value="Mobile">Mobile</option>
+                <option value="Game">Game</option>
+                <option value="Data">Data</option>
+                <option value="Hardware">Hardware</option>
+                <option value="Software">Software</option>
+                <option value="Media">Media</option>
+                <option value="Finance">Finance</option>
+                <option value="Education">Education</option>
+                <option value="Health">Health</option>
+                <option value="Art">Art</option>
+                <option value="Accommodation">Accommodation</option>
+                <option value="Food">Food</option>
+                <option value="Sport">Sport</option>
+                <option value="Real-Estate">Real-Estate</option>
+                <option value="Energy">Energy</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Amount">Desired Amount</label>
+            <select class="form-control" name="amount">
+                <option value="10000">Under $10,000</option>
+                <option value="50000">$10,000-$50,000</option>
+                <option value="100000">$50,000-$100,000</option>
+                <option value="500000">$100,000-$500,000</option>
+                <option value="1000000">$500,000-$1000,000</option>
+                <option value="5000000">$1000,000-$5000,000</option>
+                <option value="10000000">$5000,000 & Above</option>
+            </select>    
+        </div>
+        <div class="form-group">
+            <label for="Project Introduction">Project Introduction</label>
+            <textarea class="form-control" name="introduction" rows="3" placeholder="Introduce your project"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="businessPlan">Business Plan</label>
+            <input type="file" name="file" id="businessPlan" class="btn btn-primary" size="20">
+        </div>
+             
+        <button type='submit' class="btn btn-success">Submit</button>
+    </form>
+
+</div>
+
+{% endblock %}
