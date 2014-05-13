@@ -85,7 +85,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
+                    <form id="lastName1" method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Last Name</td>
                     <td><input type="text" value={{user.lastName}} name="lastName"></td>
                     <td>
@@ -165,52 +165,29 @@
   
   
   <script type="text/javascript">
-    $(document).ready(function(){
-      $('tr').each(function(){
-        var self = $(this);
-        var inputfield = self.find('input');
-        var editbtn = self.find('.edit-btn');
-        var updatebtn = self.find('.update-btn');
-        var cancelbtn = self.find('.cancel-btn');
-
-        var originVal = inputfield.val();
-
-        inputfield.attr('readonly', true);
-
-        editbtn.click(function(e){
-                e.preventDefault();
-                editbtn.hide();
-                updatebtn.show();
-                cancelbtn.show();
-                inputfield.attr('readonly', false);
-                originVal = inputfield.val();
-        });
-
-        updatebtn.hide().click(function(e){
-                e.preventDefault();
-                var url = self.find('form').attr('action');
-                alert(url);
-                var formdata = self.find('form').serialize();
-                $.post(url, formdata, function(data){
-                        inputfield.val(data[inputfield.attr('name')]);
-                        editbtn.show();
-                        updatebtn.hide();
-                        cancelbtn.hide();
-                        inputfield.attr('readonly', true);
-                }, 'json');
-        });
-
-        cancelbtn.hide().click(function(e){
-                e.preventDefault();
-                inputfield.val(originVal);
-                editbtn.show();
-                updatebtn.hide();
-                cancelbtn.hide();
-                inputfield.attr('readonly', true);						
-        });
-      });
+    $('input').attr('readonly', true);
+    $('.edit-btn').click(function(e){
+      e.preventDefault();
+      $(this).hide();
+      $(this).parent().find('.update-btn').show();
+      $(this).parent().find('.cancel-btn').show();
+      $(this).parent().parent().find('input').attr('readonly', false);
+    });
+    $('.update-btn').hide().click(function(e){
+      e.preventDefault();
+      var url = $(this).parent().parent().find('form').attr('action');
+      alert(url);
+      console.log(url);
+    });
+    $('.cancel-btn').hide().click(function(e){
+      e.preventDefault();
+      $(this).parent().find('.edit-btn').show();
+      $(this).parent().find('.update-btn').hide();
+      $(this).parent().find('.cancel-btn').hide();
+      $(this).parent().parent().find('input').attr('readonly', true);
     });
   </script>
+  
 </html>
 
 
