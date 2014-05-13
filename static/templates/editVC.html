@@ -73,30 +73,39 @@
         <div class="jumbotron">
             <table id="edit" class="table table-striped">
                 <tr>
+                    <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">First Name</td>
-                    <td>{{user.firstName}}</td>
+                    <td><input type="text" value={{user.firstName}} name="firstName"></td>
                     <td>
-                      <button type="button" id="editFirstName" class="btn btn-default btn-sm">
+                      <button type="button" class="btn btn-default edit-btn">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                       </button>
+                      <button class="btn btn-success update-btn">Update</button>
+		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
                 </tr>
                 <tr>
+                    <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Last Name</td>
-                    <td>{{user.lastName}}</td>
+                    <td><input type="text" value={{user.lastName}} name="lastName"></td>
                     <td>
-                      <button type="button" id="editLastName" class="btn btn-default btn-sm">
+                      <button type="button" class="btn btn-default edit-btn">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                       </button>
+                      <button class="btn btn-success update-btn">Update</button>
+		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
                 </tr>
                 <tr>
+                    <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Position</td>
-                    <td>{{user.position}}</td>
+                    <td><input type="text" value={{user.position}} name="position"></td>
                     <td>
-                      <button type="button" id="editPosition" class="btn btn-default btn-sm">
+                      <button type="button" class="btn btn-default edit-btn">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                       </button>
+                      <button class="btn btn-success update-btn">Update</button>
+		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
                 </tr>
                 <tr>
@@ -157,27 +166,48 @@
   
   <script type="text/javascript">
     $(document).ready(function(){
-      $("#editFirstName").click(function(){
-        var html = ['<form method="POST" id="edit_firstname_form" action="http://127.0.0.1:8000/VCEditUpdate/">',
-                    '<td class=\"yahei fs18 fwb\">First Name</td>',
-                    '<td><input type="text" name="firstName" class="form-control" placeholder="Enter user name"></td>',
-                    '<td><button type="submit" id="updateFirstName" class="btn btn-success">Update</button></td>',
-                    '</form>','<td><button type="button" id="cancelFirstname" class="btn btn-danger">Cancel</button></td>'].join('');
-        
-        $(this).parent().html(html);
-        $("#edit_firstname_form").submit(function(e){
-          // prevent form submit directly
-	  e.preventDefault();
-          // get form data
-          var self = $(this);
-          var url = self.attr('action');
-          var formdata = self.serialize();
-          // post data
-          $.post(url, formdata, function(data){
-            //handle response
-            
-          }, 'json');
-        });   
+      $('tr').each(function(){
+        var self = $(this);
+        var inputfield = self.find('input');
+        var editbtn = self.find('.edit-btn');
+        var updatebtn = self.find('.update-btn');
+        var cancelbtn = self.find('.cancel-btn');
+
+        var originVal = inputfield.val();
+
+        inputfield.attr('readonly', true);
+
+        editbtn.click(function(e){
+                e.preventDefault();
+                editbtn.hide();
+                updatebtn.show();
+                cancelbtn.show();
+                inputfield.attr('readonly', false);
+                originVal = inputfield.val();
+        });
+
+        updatebtn.hide().click(function(e){
+                e.preventDefault();
+                var url = self.find('form').attr('action');
+                alert(url);
+                var formdata = self.find('form').serialize();
+                $.post(url, formdata, function(data){
+                        inputfield.val(data[inputfield.attr('name')]);
+                        editbtn.show();
+                        updatebtn.hide();
+                        cancelbtn.hide();
+                        inputfield.attr('readonly', true);
+                }, 'json');
+        });
+
+        cancelbtn.hide().click(function(e){
+                e.preventDefault();
+                inputfield.val(originVal);
+                editbtn.show();
+                updatebtn.hide();
+                cancelbtn.hide();
+                inputfield.attr('readonly', true);						
+        });
       });
     });
   </script>

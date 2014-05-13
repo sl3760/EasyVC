@@ -253,11 +253,9 @@ def VCEditUpdate(request):
     userName = request.session['user']
     if "firstName" in request.POST:
         updateVCFirstName(userName, request.POST['firstName'])
+        return HttpResponse(json.dump(request.POST['firstName']), content_type="application/json")
     if "lastName" in request.POST:
         updateVCLastName(userName, request.POST['lastName'])
-    return render_to_response("editVC.html",
-                                locals(),
-                                context_instance=RequestContext(request))
 
 @csrf_exempt
 def showVC(request, userName):
