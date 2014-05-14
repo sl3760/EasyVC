@@ -71,9 +71,9 @@
     
     <div class='col-md-8 col-md-offset-2'>
         <div class="jumbotron">
-            <table id="edit" class="table table-striped">
+            <table id="edit" class="table table-striped">1
+                <form id='postAction' method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                 <tr>
-                    <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">First Name</td>
                     <td><input type="text" value={{user.firstName}} name="firstName"></td>
                     <td>
@@ -85,7 +85,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <form id="lastName1" method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Last Name</td>
                     <td><input type="text" value={{user.lastName}} name="lastName"></td>
                     <td>
@@ -95,9 +94,9 @@
                       <button class="btn btn-success update-btn">Update</button>
 		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
+                    
                 </tr>
                 <tr>
-                    <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Position</td>
                     <td><input type="text" value={{user.position}} name="position"></td>
                     <td>
@@ -106,50 +105,6 @@
                       </button>
                       <button class="btn btn-success update-btn">Update</button>
 		      <button class="btn btn-danger  cancel-btn">Cancel</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="yahei fs18 fwb">Location</td>
-                    <td>{{user.location}}</td>
-                    <td>
-                      <button type="button" id="editLocation" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
-                      </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="yahei fs18 fwb">Industry</td>
-                    <td>{% for industry in user.industry %} {{ industry }} | {% endfor %}</td>
-                    <td>
-                      <button type="button" id="editIndustry" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
-                      </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="yahei fs18 fwb">Investment Amount</td>
-                    <td>{% if user.amount == 10000%} Under $10,000
-                        {% elif user.amount == 50000%} $10,000-$50,000
-                        {% elif user.amount == 100000%} $50,000-$100,000
-                        {% elif user.amount == 500000%} $100,000-$500,000
-                        {% elif user.amount == 1000000%} $500,000-$1000,000
-                        {% elif user.amount == 5000000%} $1000,000-$5000,000
-                        {% elif user.amount == 10000000%} $5000,000 & Above
-                        {% endif %}
-                    </td>
-                    <td>
-                      <button type="button" id="editAmount" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
-                      </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="yahei fs18 fwb">Introduction</td>
-                    <td>{{user.introduction}}</td>
-                    <td>
-                      <button type="button" id="editIntroduction" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
-                      </button>
                     </td>
                 </tr>
             </table>
@@ -175,9 +130,9 @@
     });
     $('.update-btn').hide().click(function(e){
       e.preventDefault();
-      var url = $(this).parent().parent().find('form').attr('action');
+      var url = $(this).parents().find('#postAction').attr('action');
+      //var url = $('#postAction').attr('action');
       alert(url);
-      console.log(url);
     });
     $('.cancel-btn').hide().click(function(e){
       e.preventDefault();
