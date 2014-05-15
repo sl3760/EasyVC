@@ -77,5 +77,8 @@ def updateVCFirstName(userName, firstName):
     VCUser.objects(userName=userName).update_one(set__firstName=firstName)
     
 def updateVCLastName(userName, lastName):
-    VCUser.objects(userName=userName).update_one(set__lastName=lastName)    
+    VCUser.objects(userName=userName).update_one(set__lastName=lastName)
+    
+def updateVCPositionName(userName, position):
+    VCUser.objects(userName=userName).update_one(set__position=position)
     

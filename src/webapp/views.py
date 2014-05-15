@@ -256,7 +256,11 @@ def VCEditUpdate(request):
         return HttpResponse(json.dump(request.POST['firstName']), content_type="application/json")
     if "lastName" in request.POST:
         updateVCLastName(userName, request.POST['lastName'])
-
+    if "position" in request.POST:
+        updateVCPositionName(userName, request.POST['position'])
+    user = getUser('VC',userName)
+    return HttpResponse(user.to_json(), content_type="application/json")
+    
 @csrf_exempt
 def showVC(request, userName):
     user = getUser('VC',userName)
@@ -265,7 +269,7 @@ def showVC(request, userName):
                                 context_instance=RequestContext(request))
 
 @csrf_exempt
-def showStartup(request):
+def showStartup(request, userName):
     user = getUser('startup',userName)
     return render_to_response("showStartup.html",
                                 locals(),

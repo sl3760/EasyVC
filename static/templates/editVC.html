@@ -71,20 +71,22 @@
     
     <div class='col-md-8 col-md-offset-2'>
         <div class="jumbotron">
-            <table id="edit" class="table table-striped">1
-                <form id='postAction' method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
+            <table id="edit" class="table table-striped">             
                 <tr>
+                  <form id='postAction' method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">First Name</td>
                     <td><input type="text" value={{user.firstName}} name="firstName"></td>
                     <td>
                       <button type="button" class="btn btn-default edit-btn">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                       </button>
-                      <button class="btn btn-success update-btn">Update</button>
+                      <button type="submit" class="btn btn-success update-btn">Update</button>
 		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
+                  </form>
                 </tr>
                 <tr>
+                  <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Last Name</td>
                     <td><input type="text" value={{user.lastName}} name="lastName"></td>
                     <td>
@@ -94,9 +96,10 @@
                       <button class="btn btn-success update-btn">Update</button>
 		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
-                    
+                  </form>
                 </tr>
                 <tr>
+                  <form method="POST" action="http://127.0.0.1:8000/VCEditUpdate/">
                     <td class="yahei fs18 fwb">Position</td>
                     <td><input type="text" value={{user.position}} name="position"></td>
                     <td>
@@ -106,6 +109,7 @@
                       <button class="btn btn-success update-btn">Update</button>
 		      <button class="btn btn-danger  cancel-btn">Cancel</button>
                     </td>
+                  </form>
                 </tr>
             </table>
         </div>
@@ -118,31 +122,52 @@
     <script src="/static/js/bootstrap.min.js"></script>
   </body>
   
-  
   <script type="text/javascript">
-    $('input').attr('readonly', true);
-    $('.edit-btn').click(function(e){
-      e.preventDefault();
-      $(this).hide();
-      $(this).parent().find('.update-btn').show();
-      $(this).parent().find('.cancel-btn').show();
-      $(this).parent().parent().find('input').attr('readonly', false);
+  $(document).ready(function(){
+    $('tr').each(function(){
+        var self = $(this);
+        var inputfield = self.find('input');
+        var editbtn = self.find('.edit-btn');
+        var updatebtn = self.find('.update-btn');
+        var cancelbtn = self.find('.cancel-btn');
+
+        var originVal = inputfield.val();
+
+        inputfield.attr('readonly', true);
+
+        editbtn.click(function(e){
+                e.preventDefault();
+                editbtn.hide();
+                updatebtn.show();
+                cancelbtn.show();
+                inputfield.attr('readonly', false);
+                originVal = inputfield.val();
+        });
+
+        updatebtn.hide().click(function(e){
+                e.preventDefault();
+                var url = self.parent().parent().find('form').attr('action');
+                var formdata = self.find('form').serialize();
+                $.post(url, formdata, function(data){
+                        inputfield.val(data[inputfield.attr('name')]);
+                        editbtn.show();
+                        updatebtn.hide();
+                        cancelbtn.hide();
+                        inputfield.attr('readonly', true);
+                }, 'json');
+        });
+
+        cancelbtn.hide().click(function(e){
+                e.preventDefault();
+                inputfield.val(originVal);
+                editbtn.show();
+                updatebtn.hide();
+                cancelbtn.hide();
+                inputfield.attr('readonly', true);						
+        });
     });
-    $('.update-btn').hide().click(function(e){
-      e.preventDefault();
-      var url = $(this).parents().find('#postAction').attr('action');
-      //var url = $('#postAction').attr('action');
-      alert(url);
-    });
-    $('.cancel-btn').hide().click(function(e){
-      e.preventDefault();
-      $(this).parent().find('.edit-btn').show();
-      $(this).parent().find('.update-btn').hide();
-      $(this).parent().find('.cancel-btn').hide();
-      $(this).parent().parent().find('input').attr('readonly', true);
-    });
+  });  
   </script>
-  
 </html>
 
 
